@@ -274,7 +274,7 @@ int function(int argument)
     using namespace Geometry;
     Vector v = Vector3D<double>(0, 3, 4);
     Vector u = v;
-    u.print("\n");
+    u.print("\n");   // Печатаем вектор u
     cout << u.norm() << "\n";
     Vector w = u = Vector(0,0,0);
     u.print("\n");
