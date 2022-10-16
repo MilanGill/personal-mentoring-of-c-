@@ -1,0 +1,8 @@
+﻿  ConsoleApplication1.cpp
+C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\ConsoleApplication1.cpp(56): warning C4405: loop: идентификатор является зарезервированным словом
+  Создание кода
+  0 of 1 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  ConsoleApplication1.vcxproj -> C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\Release\My_First_Lesson.exe
