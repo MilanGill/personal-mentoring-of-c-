@@ -3,11 +3,12 @@
 #include <limits.h>
 #include <algorithm>
 #include <string>
+#include <random>
 
 
 
 using namespace std;
-#ifdef _WIN64
+#if defined (_WIN64) || defined (_DEBUG)
 __int64 __cdecl clk()
 {
     return 0;
@@ -29,54 +30,118 @@ void array_mult(T* a, const int l, T k)
    {
        *p = (*p) * k;
    }
+   
 }
 
-template<>
-void array_mult(int* a, const int l, int k)
+template <typename T>
+class Smart_Reference
 {
-    _asm
+private:
+    static T*& p()
     {
-        mov ebx, a
-        mov ecx, l
-        mov edx, k
-        push ebp
+        static T* ptr = nullptr;
+        return ptr;
     }
-loop:
-    _asm
+    static long long& count()
     {
-            mov eax, [ebp]
-            mov ebx, [ebp + 4]
-            mul edx
-            mov [ebp], eax
-            mov eax, ebx
-            mul edx
-
-            add ebx, 8
-            sub ecx, 2
-        jg loop
-        pop ebp
+        static long long c = 0;
+        return c;
     }
-}
-
-class LargeObject
-{
 public:
-    void DoSomething() {}
+    T& operator = (const T& x)
+    {
+        *p() = x;
+        return *this;
+    }
+    operator T&()
+    {
+        return *p();
+    }
+    Smart_Reference()
+    {
+        if (count() == 0)
+            p() = new T();
+        count()++;
+    }
+    ~Smart_Reference()
+    {
+        if (count() > 0)
+            count()--;
+        if (count() == 0)
+        {
+            delete p();
+            p() = nullptr;
+        }
+    }
 };
 
-void ProcessLargeObject(const LargeObject& lo) {} //  Умный указатель
-void SmartPointerDemo()
+class Oleg
 {
-    // Create the object and pass it to a smart pointer
-    std::unique_ptr<LargeObject> pLarge(new LargeObject());
+public:
+    Oleg()
+    {
+        Smart_Reference<int> i;
+        Smart_Reference<int> j;
+        cout << i << " , " << j << "\n";
+        i += 2;
+        cout << i << " , " << j << "\n";
+        j *= 5;
+        cout << i << " , " << j << "\n";
+        i = i + 2 * j;
+        cout << i << " , " << j << "\n";
+        cout << "-----------------------------------------------------------------------------\n";
+        char* p = nullptr;
+        /*cout << p;*/
 
-    //Call a method on the object
-    pLarge->DoSomething();
+        // НАСТОЯЩИЕ РАНДОМНЫЕ ЧИСЛА 
+        /*std::random_device crypto_random_generator;
+        std::uniform_int_distribution<int> int_distribution(0, 9);
 
-    // Pass a reference to a method.
-    ProcessLargeObject(*pLarge);
+        int actual_distribution[10] = { 0,0,0,0,0,0,0,0,0,0 };
 
-} //pLarge is deleted automatically when function block goes out of scope.                              
+        for (int i = 0; i < 10000; i++) {
+            int result = int_distribution(crypto_random_generator);
+            actual_distribution[result]++;
+        }
+
+        for (int i = 0; i < 10; i++) {
+            std::cout << actual_distribution[i] << " ";
+        }*/
+
+    }
+}oleg;
+////template<>
+////void array_mult(int* a, const int l, int k)
+//{
+//    _asm
+//    {
+//        mov ebx, a
+//        mov ecx, l
+//        mov edx, k
+//        push ebp
+//    }
+//loop:
+//    _asm
+//    {
+//            mov eax, [ebp]
+//            mov ebx, [ebp + 4]
+//            mul edx
+//            mov [ebp], eax
+//            mov eax, ebx
+//            mul edx
+//
+//            add ebx, 8
+//            sub ecx, 2
+//        jg loop
+//        pop ebp
+//    }
+//}
+
+
+
+
+
+
 namespace Geometry
 {
 #if 0
@@ -130,7 +195,7 @@ namespace Geometry
     }
 
 #endif
-
+    
     template <typename Coord_Type>
     class Vector3D
     {
@@ -150,7 +215,7 @@ namespace Geometry
             return Vector3D(-x, -y, -z);
         }
 
-         Vector3D operator [] (int k) const
+         Coord_Type operator [] (int k) const
         {
             
             if (k == 0) 
@@ -238,11 +303,6 @@ public:
 
 int Klient::quantity = 0;
 
-    static int function()
-    {
-        return 123;
-    }
-template <typename T>
 int function(int argument) 
 {
 
@@ -287,11 +347,9 @@ int function(int argument)
     cout << "Разность векторов (sum,v) это вектор - ";
     (sum - v).print("\n");
     using namespace std;
-    cout << function();
-    sum[1].print();
+    cout << sum[1]; 
+    return 12;
 }
-
-
 
 int max(int array[], int length)
 {
@@ -333,7 +391,7 @@ double median(int array[], int length)
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    
+    function(1);
     //std::cout << "Результат функции умножения на 12 = " << i << '\n';
    // std::cout << "Введите количество элементов массива" << '\n';
     //std::cout << "Введите элементы массива через пробел" << '\n';
@@ -356,3 +414,5 @@ int main()
 
 
 
+// Попробовать анролинг на C 
+// 

@@ -1,4 +1,3 @@
 ﻿  ConsoleApplication1.cpp
-C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\ConsoleApplication1.cpp(56): warning C4405: loop: идентификатор является зарезервированным словом
-C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\ConsoleApplication1.cpp(57): warning C4731: array_mult<int>: регистр указателя фрейма "ebp" изменен встроенным кодом на языке ассемблера
-  ConsoleApplication1.vcxproj -> C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\Debug\My_First_Lesson.exe
+C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\ConsoleApplication1.cpp(224): warning C4715: Geometry::Vector3D<double>::operator[]: значение возвращается не при всех путях выполнения
+  ConsoleApplication1.vcxproj -> C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\Debug\My_First_Lesson.exe
