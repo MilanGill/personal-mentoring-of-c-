@@ -1,3 +1,3 @@
 ﻿  ConsoleApplication1.cpp
-C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\ConsoleApplication1.cpp(224): warning C4715: Geometry::Vector3D<double>::operator[]: значение возвращается не при всех путях выполнения
-  ConsoleApplication1.vcxproj -> C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\Debug\My_First_Lesson.exe
+C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\ConsoleApplication1.cpp(446,1): error C2253: Array_Interface<`template-type-parameter-1'>: в виртуальной функции допускаются только чистый спецификатор или абстрактный спецификатор переопределения
+C:\Users\Милан Гилл Сингх\Desktop\My Programms C++\My_First_Lesson\ConsoleApplication1\ConsoleApplication1.cpp(448): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "Array_Interface<T>"
