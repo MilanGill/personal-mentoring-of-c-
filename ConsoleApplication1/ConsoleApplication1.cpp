@@ -510,26 +510,47 @@ public:
         return n;
     }
 protected:
-    virtual void add(const T& element) {}
-    virtual void insert(int i, const T& element) {}
-    virtual void remove(int i, int n = 0) {}
-    virtual void add_array(const Array_Interface<T>& other_array) {}
-    virtual void insert_array(int i, const Array_Interface<T>& other_array) {}
+    virtual void add(const T& element) {
+        a[n] = element;
+    }
+    virtual void insert(int i, const T& element) {
+        a[i] = element;
+    }
+    virtual void remove(int i, int n) {
+        for (i; i < n; i++) {
+            a[i] = a[i + 1];
+        }
+    }
+    virtual void add_array(const Array_Interface<T>& other_array) {
+        for (int i = n; i <= 2 * n; i++) {
+            a[i] = other_array[i-n];
+        }
+    }
+    virtual void insert_array(int i, const Array_Interface<T>& other_array) {
+        int n2 = sizeof(other_array)/sizeof(other_array[0]);
+        for (int j = n ; j < n + n2; j++) {
+            a[i] = a[i - n2];
+        }
+        for (int j = 0 ; j < n2; j++) {
+            a[i] = other_array[j];
+            i++;
+        }
+    }
     virtual void on_error(const char* message) {
         cout << message << '\n';
         std::runtime_error err(message);
     }
 };
-#if 0
+
 template <typename T>
 class Array_ : public Array<T>
 {
 public:
-    virtual ~Array_Interface() {}
+    virtual ~Array_() {}
     virtual T& operator [] (int k) {}
     virtual const T& operator [] (int k) const {}
-
-
+};
+#if 0
     virtual int size()
     virtual void add(const T& element) {}
     virtual void insert(int i, const T& element) {}
@@ -559,3 +580,6 @@ public:
 
 // Домашнее задание : 
 // Доделать Array и Array_ (+ проверить как все работает)
+
+
+// Я написал методы только для обычного массива
